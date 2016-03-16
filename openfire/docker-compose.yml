@@ -2,6 +2,8 @@ openfire:
     image: openfire:4.0.1
     links:
         - openfire_db:mysql
+    volumes:
+        - ./openfire_cfg/:/docker-entrypoint-initcfg.d/
     ports:
         - "9090:9090"
         - "9091:9091"
@@ -20,6 +22,7 @@ openfire_db:
         MYSQL_ROOT_PASSWORD:    examplepass
     volumes:
         - ./initdb.d:/docker-entrypoint-initdb.d/
+        - mysql_data:/var/lib/mysql
     ports:
         - 3306:3306
 
